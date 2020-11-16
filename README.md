@@ -8,4 +8,4 @@ docker build -t myimage .
 docker run -p 23:23 myimage
 
 ## Log file location
-/var/lib/docker/containers/<container id>/<container id>-json.log
+``` /var/lib/docker/containers/<container id>/<container id>-json.log ```
