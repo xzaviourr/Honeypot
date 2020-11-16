@@ -20,7 +20,7 @@ class FileSystem:
 	def ls(self):
 		return self.os_module.listdir(self.os_module.path.dirname(self.pathname))
 
-obj = FileSystem()
-obj.create_file('test1.txt', 'Hello World \nI am a programmer')
-print(obj.read_file('test1.txt'))
-print(obj.ls())
+# obj = FileSystem()
+# obj.create_file('test1.txt', 'Hello World \nI am a programmer')
+# print(obj.read_file('test1.txt'))
+# print(obj.ls())
