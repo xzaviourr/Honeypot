@@ -16,6 +16,7 @@ class Server:
 		self.soc.listen(5)
 		self.log.info('Server Active')
 		self.thread_lock = threading.Lock()
+		self.file_system = FileSystem()
 
 	def __accept_requests(self):
 		def __threaded(c, client_ip):
@@ -26,10 +27,12 @@ class Server:
 			c.send('password: '.encode())
 			self.log.warning('password: ' + str(c.recv(4096)))
 			while True:
-				c.send('xzaviourr@xzaviourr: '.encode())
+				path = self.file_system.pathname
+				c.send(('xzaviourr@xzaviourr:' + str(path)).encode())
 				data = str(c.recv(4096))
+				data = data[2: -5]
 				if data == 'quit':
-					break 
+					break
 				reply = self.__process_input(data)
 				c.send(reply.encode())
 
@@ -47,7 +50,21 @@ class Server:
 			start_new_thread(__threaded, (c, addr[0],))
 
 	def __process_input(self, data):
-		return "Working"
+		functions = self.file_system.functions
+		frag = data.split(" ")
+		frag = list(filter(lambda x: (x != ''), frag))
+		self.log.info(str(frag))
+		fun = functions[frag[0]]
+		for i in range(1, len(frag)):
+			fun  = fun[:-1] + r'"{}",)'.format(frag[i])
+		if len(frag) > 1:
+			fun = fun[:-2] + ')'
+
+		self.log.info(fun)
+		exec('self.file_system.' + fun)
+		reply = self.file_system.reply + '\n'
+		self.log.info(str(reply))
+		return str(reply)
 
 	def controller(self):
 		self.__accept_requests()
