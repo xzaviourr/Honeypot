@@ -158,6 +158,3 @@ class FileSystem:
 		    for j in range(r):
 		        direct ='/' + list[i]+'/'+ str(self.get_random_string(3))
 		        self.create_file(direct, 'This is '+direct+' directory')
-
-obj = FileSystem()
-print(obj.ls())
