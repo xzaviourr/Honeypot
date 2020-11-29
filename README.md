@@ -9,3 +9,5 @@ Implementation of a basic honey pot, that binds itself with the telnet port and 
 
 ## Log file location
 ``` /var/lib/docker/containers/<container id>/<container id>-json.log ```
+
+### You can check out the ppt presentation we made on this project [here](https://drive.google.com/file/d/1hBmEDj2MPR13lSb2BKT2xJi6MIWp8-8-/view?usp=sharing)
